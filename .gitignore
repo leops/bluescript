@@ -1,0 +1,6 @@
+.tmp/
+bin/
+bower_components/
+node_modules/
+saves/
+src/js/bower/

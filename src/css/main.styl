@@ -1,0 +1,269 @@
+body
+	margin 0
+	height 100vh
+	width 100vw
+	overflow hidden
+	font-family sans-serif
+	font-size 16px
+
+[data-theme=carbon]
+	#viewport
+		background linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px, linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px, linear-gradient(27deg, #222 5px, transparent 5px) 0px 10px, linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px, linear-gradient(90deg, #1b1b1b 10px, transparent 10px), linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #242424 75%, #242424)
+		background-color #131313
+		background-size 20px 20px
+
+blueprint(bg, fg, fg2)
+	background-color bg
+	background-image linear-gradient(fg 2px, transparent 2px), linear-gradient(90deg, fg 2px, transparent 2px), linear-gradient(fg2 1px, transparent 1px), linear-gradient(90deg, fg2 1px, transparent 1px)
+	background-size 100px 100px, 100px 100px, 20px 20px, 20px 20px
+	background-position -2px -2px, -2px -2px, -1px -1px, -1px -1px
+
+[data-theme=grey]
+	#viewport
+		blueprint(#2a2a2a, #1c1c1c, #353535)
+
+[data-theme=blueprint]
+	#viewport
+		blueprint(#269, white, rgba(white, .3))
+
+	#resizeHandleH, #resizeHandleV
+		border-color white
+
+	#sidebar, #output
+		background-color #78B2DD
+
+#mainview
+	height 100vh
+	width 100vw
+
+.flex
+	display flex
+	align-items stretch
+
+	&.flex-horizontal
+		flex-direction row
+
+	&.flex-vertical
+		width 100%
+		flex-direction column
+
+pre
+	margin 0
+	padding 8px
+
+#sidebar
+	box-sizing border-box
+	overflow auto
+	color #eee
+	min-width 15vw
+	flex-grow 1
+	flex-basis 250px
+	max-width calc(100vw - 100px)
+
+	background-color #333
+
+	&:empty::after
+		content: 'Nothing selected'
+
+#column
+	flex-grow 4
+	flex-shrink 3
+
+#bottombar
+	background-color #333
+	min-height 15vh
+	flex-grow 1
+	flex-basis 220px
+	overflow auto
+	color #eee
+	max-height calc(100vh - 150px)
+
+#output, #logs
+	flex 1
+
+#resizeHandleH, #resizeHandleH2
+	height 100%
+	width 0
+	border-left 2px solid #000
+	cursor ew-resize
+	padding 0 5px
+	position fixed
+	z-index 1
+
+#resizeHandleV
+	width 100%
+	height 0
+	border-top 2px solid #000
+	cursor ns-resize
+	padding 5px 0
+	position fixed
+	z-index 1
+
+#viewport
+	position relative
+	overflow auto
+	background-attachment local
+	-webkit-user-select none
+	flex-grow 4
+	flex-shrink 3
+
+	.canvas
+		overflow hidden
+		position absolute
+		top 0
+		left 0
+		pointer-events none
+
+	.menu
+		position absolute
+		min-width 100px
+		min-height 100px
+		overflow auto
+
+		background-color rgba(#292929, .8)
+		border 1px solid black
+
+		&:not(.show)
+			display none
+
+		details a
+			margin-left 20px
+
+		a, summary
+			padding 3px
+			display block
+			color white
+			font-family sans-serif
+			text-decoration none
+
+			&:hover
+				background-color grey
+
+	.selectBox
+		position absolute
+		background-color rgba(orange, .3)
+		border 1px solid orange
+
+	.node
+		position absolute
+		background-color rgba(#1b1b1b, .7)
+		color #E0E0E0
+		border-radius 5px
+		overflow hidden
+		border 1px black solid
+		box-shadow 0 1px 9px rgba(black, .5)
+		font-family monospace
+		font-size 11px
+		z-index 10
+
+		&.selected
+			border 1px orange solid
+			z-index 11
+
+		min-width 140px
+		min-height 110px
+
+		width -webkit-max-content
+		width -moz-max-content
+		width max-content
+
+		header-gradient(color)
+			background-image linear-gradient(160deg, color, #2a2b2a)
+
+		&.node-loop header,
+		&.node-call header
+			header-gradient(#3498db)
+
+		&.node-function header
+			header-gradient(#27ae60)
+
+		&.node-variable header
+			header-gradient(#c0392b)
+
+		&.node-special header
+			header-gradient(#9908d6)
+
+		&.node-builder header
+			header-gradient(#e67e22)
+
+		header
+			width 100%
+			height 37px
+			background-clip border-box
+			padding 4px 7px 4px 23px
+			box-sizing border-box
+
+			h1, h2
+				margin 0
+				display block
+				font-size 1em
+
+			.node-output
+				float right
+				position relative
+				top calc(-2em - 6px)
+
+		.node-body
+			min-height 79px
+			min-width 140px
+
+			.node-input,
+			.node-output
+				&::before,
+				&::after
+					margin 0 5px
+
+			.node-inputs
+				float left
+				margin-right 3px
+
+				.add
+					position absolute
+					bottom 5px
+					left 5px
+
+			.node-outputs
+				float right
+				text-align right
+				margin-left 3px
+
+				.add
+					position absolute
+					bottom 5px
+					right 5px
+
+		.node-input, .node-output
+			&.pin-exec
+				&::before,
+				&::after
+					content '>>'
+
+			&.pin-object
+				&::before,
+				&::after
+					content 'O'
+
+			input
+				min-width 35px
+				width auto
+				max-width 100px
+
+			&.active
+				&.pin-exec
+					&::before,
+					&::after
+						content '->'
+
+				&.pin-object
+					&::before,
+					&::after
+						content 'X'
+
+				input
+					display none
+
+		.node-input::after
+				display none
+
+		.node-output::before
+				display none

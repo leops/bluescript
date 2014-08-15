@@ -1,0 +1,17 @@
+html
+	head
+		title BlueScript
+		link(href="css/main.css", rel="stylesheet")
+	body(data-theme="grey")
+		#mainview.flex.flex-horizontal
+			pre#sidebar
+			#resizeHandleH
+			#column.flex.flex-vertical
+				#viewport
+				#resizeHandleV
+				#bottombar.flex.flex-horizontal
+					pre#output
+					#resizeHandleH2
+					pre#logs
+		script(data-main="js/config" src="js/bower/require.js")
+		script(src="http://localhost:35729/livereload.js")

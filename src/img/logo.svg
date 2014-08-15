@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 630 630">
+    <!-- Based on @voodtikigod's https://github.com/voodootikigod/logo.js -->
+    <g id="logo">
+        <rect id="background" x="0" y="0" width="630" height="630" fill="#30CAE0" />
+        <text x="175" y="575" font-family="Trebuchet MS" font-size="400" font-weight="700" style="line-height: 1.1em; letter-spacing: -1px; text-shadow: 1px 1px 0px #2e2e2c;" fill="#2e2e2c">BS</text>
+    </g>
+</svg>

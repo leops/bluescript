@@ -1,0 +1,11 @@
+{
+    "name": "BlueScript",
+    "version": "0.0.1",
+    "description": "A graphic editor for JavaScript",
+    "author": "leops",
+    "dependencies": {
+        "jquery": "*",
+        "requirejs": "~2.1.14",
+        "coffeescript": "~1.7.1"
+    }
+}
